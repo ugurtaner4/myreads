@@ -1,23 +1,22 @@
 import React, { Component }  from 'react';
-import SearchBookButton from './Components/SearchBookButton'
-import BookCase from './Components/BookCase'
+import Book from './Book'
 
 
-class BookList extends Component
+const BookList = (props)=>
 {
-    render()
-    {
-        const { bookshelves, books, onMove } = this.props;
-        return(
-            <div className="listBooks">
-                <div className="list-books-title">
-                    <h1>My Reads</h1>
-                    <BookCase bookshelves={bookshelves} books={books} onMove={onMove} />
-                    <SearchBookButton/>
-                </div>
-            </div>
-        )
-    }
+    const bookShelves = props.bookShelves;
+    return(
+        <div>
+            {bookShelves && bookShelves.length > 0 ?
+                <ol className="books-grid">{
+                    bookShelves.map(b =>{
+                        return <Book key={b.id}  bookDetails={b} onChangeShelf={props.onChangeShelf}/>
+                    })
+                }
+                </ol>
+            : <div>There are no books finded'</div>
+            }
+        </div>
+    )
 }
-
 export default BookList
