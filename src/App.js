@@ -35,7 +35,7 @@ class BooksApp extends Component {
 
  
   render() {
-    {console.log(Object.values(this.state.books))}
+    
     return (
       <div className="app">
         
