@@ -9,25 +9,27 @@ class BookSearch extends Component {
       results:[]
     }
 
-    // bookMap(books,allBooks){
-    //   console.log(Object.values(books))
-    //   console.log(Object.values(allBooks))
-    //   Object.values(books).map((b)=>{
-    //     let match = _.find(allBooks, {id: b.id});
-    //                 if (match && !_.isEmpty(match)) {
-    //                     b.shelf = match.shelf;
-    //                 } else {
-    //                     b.shelf = 'none';
-    //                 }
-    //                 return b;
-    //   })
-    // }
     search(keywordInput){
       const allBooks = this.props.books;
-      BooksAPI.search(keywordInput).then((books)=>{
-        //const mappedBooks = this.bookMap(books,allBooks);
-        this.setState({results: books})
-      })
+        BooksAPI.search(keywordInput).then((books) => {
+          {console.log(Object.values(books))}
+            if (books && books.error) {
+                this.setState({ results: []});
+            } else {
+               const booksMapped= books.map((b) => {
+                    let match = _.find(allBooks, {id: b.id});
+                    if (match && !_.isEmpty(match)) {
+                        b.shelf = match.shelf;
+                    } else {
+                        b.shelf = 'none';
+                    }
+
+                    return b;
+                })
+                
+                this.setState({ results: booksMapped })
+            }
+        })
     }
 //handling input text
     setKeyword(keywordInput)

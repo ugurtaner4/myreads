@@ -3,7 +3,7 @@ import React from 'react'
 //passing Book in a loop so we can use other side 
 const Book = (props) => {
   const {imageLinks, title, authors, shelf} = props.bookDetails;
-   
+  const url = imageLinks && imageLinks.smallThumbnail ? imageLinks.smallThumbnail : '';
   return (
       <li>
           <div className="book">
@@ -11,7 +11,7 @@ const Book = (props) => {
                   <div className="book-cover" style={{ 
                       width: 128, 
                       height: 193, 
-                      backgroundImage: "url(" + imageLinks.smallThumbnail + ")"
+                      backgroundImage: "url(" + url + ")"
                   }}>
                   </div>
                   <div className="book-shelf-changer">
